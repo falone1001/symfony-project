@@ -1,0 +1,127 @@
+{% extends "dashboard/index.html.twig" %}
+
+{% block title %}
+	{{title}}
+{% endblock %}
+
+{% block nav %}
+	<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+		<div class="position-sticky pt-3">
+			<ul class="nav flex-column">
+				<li class="nav-item">
+					<a class="nav-link" aria-current="page" href="/dashboard">
+						<span data-feather="home"></span>
+						Dashboard
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" href="/dashboard/plans">
+						<span data-feather="file"></span>
+						Plans
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/dashboard/orders">
+						<span data-feather="shopping-cart"></span>
+						Orders
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/dashboard/customers">
+						<span data-feather="user-check"></span>
+						Customers
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/dashboard/users">
+						<span data-feather="user-check"></span>
+						Users
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/dashboard/faqs">
+						<span data-feather="help-circle"></span>
+						FAQs
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+{% endblock %}
+
+{% block content %}
+	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+			<h1>Plans</h1>
+		</div>
+		<div class="row border-bottom">
+			<h2>Add plan</h2>
+			{# {{ form(form) }} #}
+			<div class="col-md-6">
+				<div class="form-group" id="edit_form">
+					{{ form_start(form) }}
+					{{ form_label(form.title)}}
+					{{ form_widget(form.title, { 'attr': {'class': 'form-control'} })  }}<br>
+					{{ form_label(form.price)}}
+					{{ form_widget(form.price, { 'attr': {'class': 'form-control'} })  }}<br>
+					{{ form_label(form.ram)}}
+					{{ form_widget(form.ram, { 'attr': {'class': 'form-control'} })  }}<br>
+					{{ form_label(form.storage)}}
+					{{ form_widget(form.storage, { 'attr': {'class': 'form-control'} })  }}<br>
+					{{ form_label(form.backup)}}
+					{{ form_widget(form.backup, { 'attr': {'class': 'form-check-input'} })  }}<br><br>
+					{{ form_widget(form.save, { 'attr': {'class': 'btn btn-md btn-primary'} })  }}
+					{{ form_end(form) }}
+				</div>
+			</div>
+
+
+		</div>
+		<h2>Current plans</h2>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Title</th>
+					<th scope="col">Price</th>
+					<th scope="col">Ram</th>
+					<th scope="col">Storage</th>
+					<th scope="col">Backup</th>
+					<th scope="col"></th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for plan in plans %}
+					<tr>
+						<th scope="row">{{plan.id}}</th>
+						<td>{{plan.title}}</td>
+						<td>{{plan.price}}
+							TND/mo</td>
+						<td>{{plan.ram}}
+							GB</td>
+						<td>{{plan.storage}}
+							GB</td>
+						<td>
+							{% if plan.backup == 1 %}
+								<i class="fas fa-check-circle"></i>
+							{% else %}
+								<i class="fas fa-times-circle"></i>
+							{% endif %}
+						</td>
+						<td>
+							<a href="/dashboard/plans/update/{{plan.id}}" class="a-no-color">
+								<i class="far fa-edit"></i>
+							</a>
+						</td>
+						<td>
+							<a href="/dashboard/plans/delete/{{plan.id}}" class="a-no-color">
+								<i class="far fa-trash-alt"></i>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</main>
+{% endblock %}

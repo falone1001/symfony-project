@@ -1,0 +1,37 @@
+{% extends "pricing.html.twig" %}
+
+{% block content %}
+<div class="px-4 py-5 my-5 text-center">
+  <h1 class="display-7 fw-bold">VPS Hosting | SSD Storage | Get Cheap VPS for 9 TND Only</h1>
+</div>
+
+<div class="row row-cols-2 row-cols-md-3 mb-3 text-center">
+    {% for plan in plans %}
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">{{plan.title}}</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">{{plan.price}} TND<small class="text-muted fw-light">/mo</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>{{plan.ram}} GB RAM</li>
+              <li>{{plan.storage}} GB Storage</li>
+              <li>
+                Automatic Backups 
+                {% if plan.backup == 1 %}
+								<i class="fas fa-check-circle"></i>
+							{% else %}
+								<i class="fas fa-times-circle"></i>
+							{% endif %}
+              </li>
+            </ul>
+            {# <button type="button" class="w-100 btn btn-lg btn-outline-purple"> #}
+              <a class="w-100 btn btn-lg btn-outline-purple" href="/signup">Order Now!</a>
+            {# </button> #}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+{% endblock %}

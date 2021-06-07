@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Faq;
+
+
+class FaqController extends AbstractController
+{
+    /**
+     * @Route("/faq", name="faq")
+     */
+    public function index(): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository(Faq::class);
+        $faqs = $repo->findAll();
+        return $this->render('faq/content.html.twig', [ 'title' => 'FAQs', 'faqs' => $faqs ]);
+
+    }
+}
